@@ -1,9 +1,9 @@
 CC = gcc
 CFLAGS = -Wall -g
 
-SRC = tree.h node.h
+SRC = tree.h node.h helper.h
 
-OBJ = tree.o
+OBJ = tree.o helper.o
 MASTER_OBJ = main.o
 
 MASTER = P0
@@ -19,4 +19,4 @@ $(MASTER): $(MASTER_OBJ) $(OBJ)
 	$(CC) $(CFLAGS) $(MASTER_OBJ) $(OBJ) -o $(MASTER)
 
 clean: 
-	rm $(OUTPUT) *.o *.inorder *.preorder *.postorder  
+	rm $(OUTPUT) *.o *.inorder *.preorder *.postorder output 
