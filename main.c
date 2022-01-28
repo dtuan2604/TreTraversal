@@ -1,12 +1,15 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "tree.h"
+#include "helper.h"
 #include <string.h>
 
 
 char fileName[100];
 char tempFile[100];
 char prog[100];
+
+int isfileEmpty(FILE * fp);
 
 int main(int argc, char** argv)
 {
@@ -26,8 +29,18 @@ int main(int argc, char** argv)
 		int input;	
 	
 		if(ptr == NULL){
-			fprintf(stderr,"ERROR: %s: Cannot open file",prog);
+			fprintf(stderr,"ERROR: %s: Cannot open file\n",prog);
 			return EXIT_FAILURE;
+		}
+	
+		if((input = getchar()) == EOF)
+		{
+			fprintf(stderr,"ERROR: %s: Input is empty\n",prog);
+			return EXIT_FAILURE;
+		}	
+		else
+		{
+			fprintf(ptr,"%c", input);
 		}
 		
 		while((input = getchar()) != EOF)
@@ -35,6 +48,7 @@ int main(int argc, char** argv)
 			fprintf(ptr,"%c",input);	
 
 		}
+		
 		printf("Finish\n");	
 		fclose(ptr);	
 		
@@ -47,15 +61,42 @@ int main(int argc, char** argv)
 	}
 
 	FILE *inputPtr = fopen(fileName, "r");
-	if(inputPtr == NULL)
-	{
-		fprintf(stderr,"%s: Cannot open file %s\n", prog,fileName);
-		return EXIT_FAILURE;
-
-	}	
+	if(isfileEmpty(inputPtr) == 0)
+		return EXIT_FAILURE;	
+	
+	//node_t *root = buildTree(inputPtr);
+	//insert(node_t *rootNode, node_t *newNode)
+	
+	fclose(inputPtr);
 
 	return EXIT_SUCCESS;
 
 
 
 }
+
+//Checking if the file is exist or empty
+int isfileEmpty(FILE * fp)
+{
+	if(fp != NULL)
+	{
+		fseek(fp, 0, SEEK_END);
+		int test = ftell(fp);
+
+		if(test == 0)
+		{
+			fprintf(stderr, "ERROR: %s: Input is empty\n", prog);
+			return 0;
+		}
+			 
+
+	}
+	else
+	{
+		fprintf(stderr, "ERROR: %s: Cannot open file\n", prog);
+		return 0;
+	}
+	
+	return 1;
+}
+
