@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-char* headerfile = "helper.h";
+char* helpFile = "helper.h";
 
 char* stringToData(char* str)
 {
@@ -11,7 +11,7 @@ char* stringToData(char* str)
 	char* buffer = (char*)malloc(size);
 	if(buffer == NULL)
 	{
-		fprintf(stderr,"ERROR: %s: failed to allocate log", headerfile);
+		fprintf(stderr,"ERROR: %s: failed to allocate log", helpFile);
 		return NULL;		
 	}
 	char colon = ':';

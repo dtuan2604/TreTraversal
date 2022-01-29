@@ -65,7 +65,8 @@ int main(int argc, char** argv)
 		return EXIT_FAILURE;	
 
 	struct node_t *root = buildTree(inputPtr);
-	//insert(node_t *rootNode, node_t *newNode)
+
+	printInorder(root, tempFile);
 	
 	fclose(inputPtr);
 	destroyTree(root);	
