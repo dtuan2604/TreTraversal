@@ -63,11 +63,12 @@ int main(int argc, char** argv)
 	FILE *inputPtr = fopen(fileName, "r");
 	if(isfileEmpty(inputPtr) == 0)
 		return EXIT_FAILURE;	
-	
-	//node_t *root = buildTree(inputPtr);
+
+	struct node_t *root = buildTree(inputPtr);
 	//insert(node_t *rootNode, node_t *newNode)
 	
 	fclose(inputPtr);
+	destroyTree(root);	
 
 	return EXIT_SUCCESS;
 
@@ -96,6 +97,8 @@ int isfileEmpty(FILE * fp)
 		fprintf(stderr, "ERROR: %s: Cannot open file\n", prog);
 		return 0;
 	}
+	
+	fseek(fp, 0, SEEK_SET);
 	
 	return 1;
 }

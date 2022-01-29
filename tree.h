@@ -2,12 +2,14 @@
 #define _TREE_H
 #include "node.h"
 
-node_t *buildTree(FILE *inputPtr);
-void insert(node_t *rootNode, node_t *newNode);
+struct node_t *buildTree(FILE *inputPtr);
+void insertNode(struct node_t *nodePtr, struct node_t *newNode);
 
-void printInorder(char* fileName);
-void printPreorder(char* fileName);
-void printPostorder(char* fileName);
+void destroyTree(struct node_t *nodePtr);
+
+void printInorder(struct node_t *nodePtr);
+void printPreorder(struct node_t *nodePtr);
+void printPostorder(struct node_t *nodePtr);
 
 
 
