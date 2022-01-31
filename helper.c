@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdarg.h>
 
 char* helpFile = "helper.h";
 
@@ -22,4 +23,23 @@ char* stringToData(char* str)
 	strcat(buffer, str);
 
 	return buffer;
+}
+
+void writeFile(FILE * fp, char* fmt, ...)
+{
+	char buf[BUFFER];
+	va_list args;
+
+	va_start(args, fmt);
+	vsprintf(buf, fmt, args);
+	va_end(args);
+
+
+	if(fp != NULL)
+	{
+		fprintf(fp, buf);
+		fflush(fp);
+	}	
+
+
 } 

@@ -90,10 +90,9 @@ void destroyTree(struct node_t *nodePtr)
 	}
 }
 
-void printInorder(struct node_t *root, char* fileName)
+void printPreorder(struct node_t *root, char* fileName)
 {
-	printf("From inorder function\n");
-	char* exten = ".inorder";
+	char* exten = ".preorder";
 	char* outputFile = (char*)malloc(sizeof(fileName) + sizeof(exten));
 	if(outputFile == NULL)
 	{
@@ -105,7 +104,6 @@ void printInorder(struct node_t *root, char* fileName)
 	strcat(outputFile,exten);
 
 	FILE *fp = fopen(outputFile, "w");
-	int output;
 	
 	if(fp == NULL)
 	{
@@ -113,24 +111,104 @@ void printInorder(struct node_t *root, char* fileName)
                 return;
 	}
 
-	traverseInorder(root, 0,fp); 
+	traversePreorder(root, 0,fp); 
 
 	fclose(fp);
 	free(outputFile);	
 }
 
-void traverseInorder(struct node_t *nodePtr, int level, FILE * fp)
+void traversePreorder(struct node_t *nodePtr, int level, FILE * fp)
 {
 	if(nodePtr != NULL)
 	{
-		printf("%*s", level * 2,"");
-		printf("%s\n", nodePtr->data);
+		writeFile(fp,"%*s", level * 2,"");
+		writeFile(fp,"%s\n", nodePtr->data);
 		
-		traverseInorder(nodePtr->left, level + 1, fp);
-		traverseInorder(nodePtr->middle, level + 1, fp);
-		traverseInorder(nodePtr->right, level + 1, fp); 		
+		traversePreorder(nodePtr->left, level + 1, fp);
+		traversePreorder(nodePtr->middle, level + 1, fp);
+		traversePreorder(nodePtr->right, level + 1, fp); 		
 	}		
 }
 
+void printInorder(struct node_t *root, char* fileName)
+{
+        char* exten = ".inorder";
+        char* outputFile = (char*)malloc(sizeof(fileName) + sizeof(exten));
+        if(outputFile == NULL)
+        {
+                fprintf(stderr,"ERROR: %s: Cannot allocate memory\n", treeFile);
+                return;
+        }
+
+        strcpy(outputFile,fileName);
+        strcat(outputFile,exten);
+
+        FILE *fp = fopen(outputFile, "w");
+
+        if(fp == NULL)
+        {
+                fprintf(stderr,"ERROR: %s: Cannot open file\n",treeFile);
+                return;
+        }
+
+        traverseInorder(root, 0,fp);
+
+        fclose(fp);
+        free(outputFile);
+}
+
+void traverseInorder(struct node_t *nodePtr, int level, FILE * fp)
+{
+        if(nodePtr != NULL)
+        {
+                traverseInorder(nodePtr->left, level + 1, fp);
+		
+		writeFile(fp,"%*s", level * 2,"");
+                writeFile(fp,"%s\n", nodePtr->data);
+
+                traverseInorder(nodePtr->middle, level + 1, fp);
+                traverseInorder(nodePtr->right, level + 1, fp);
+        }
+}
+
+void printPostorder(struct node_t *root, char* fileName)
+{
+        char* exten = ".postorder";
+        char* outputFile = (char*)malloc(sizeof(fileName) + sizeof(exten));
+        if(outputFile == NULL)
+        {
+                fprintf(stderr,"ERROR: %s: Cannot allocate memory\n", treeFile);
+                return;
+        }
+
+        strcpy(outputFile,fileName);
+        strcat(outputFile,exten);
+
+        FILE *fp = fopen(outputFile, "w");
+
+        if(fp == NULL)
+        {
+                fprintf(stderr,"ERROR: %s: Cannot open file\n",treeFile);
+                return;
+        }
+
+        traversePostorder(root, 0,fp);
+
+        fclose(fp);
+        free(outputFile);
+}
+
+void traversePostorder(struct node_t *nodePtr, int level, FILE * fp)
+{
+        if(nodePtr != NULL)
+        {
+                traversePostorder(nodePtr->left, level + 1, fp);
+		traversePostorder(nodePtr->middle, level + 1, fp);
+                traversePostorder(nodePtr->right, level + 1, fp);
+
+                writeFile(fp,"%*s", level * 2,"");
+                writeFile(fp,"%s\n", nodePtr->data);
+        }
+}
 
 

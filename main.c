@@ -66,7 +66,9 @@ int main(int argc, char** argv)
 
 	struct node_t *root = buildTree(inputPtr);
 
+	printPreorder(root, tempFile);
 	printInorder(root, tempFile);
+	printPostorder(root, tempFile);	
 	
 	fclose(inputPtr);
 	destroyTree(root);	

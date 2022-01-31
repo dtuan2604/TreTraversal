@@ -19,4 +19,4 @@ $(MASTER): $(MASTER_OBJ) $(OBJ)
 	$(CC) $(CFLAGS) $(MASTER_OBJ) $(OBJ) -o $(MASTER)
 
 clean: 
-	rm $(OUTPUT) *.o *.inorder *.preorder *.postorder output 
+	rm -f $(OUTPUT) *.o *.inorder *.preorder *.postorder output 
