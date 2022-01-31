@@ -5,8 +5,8 @@ struct node_t
 {
 	char* data;
 	struct node_t* left;
-	struct node_t* right;
 	struct node_t* middle;
+	struct node_t* right;
 };
 
 #endif

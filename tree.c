@@ -86,6 +86,7 @@ void destroyTree(struct node_t *nodePtr)
 			destroyTree(nodePtr->right);
 		free(nodePtr->data);
 		free(nodePtr);
+		nodePtr->data = NULL;
 		nodePtr = NULL;			
 	}
 }

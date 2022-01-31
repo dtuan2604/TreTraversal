@@ -34,12 +34,9 @@ void writeFile(FILE * fp, char* fmt, ...)
 	vsprintf(buf, fmt, args);
 	va_end(args);
 
-
 	if(fp != NULL)
 	{
 		fprintf(fp, buf);
 		fflush(fp);
 	}	
-
-
 } 
