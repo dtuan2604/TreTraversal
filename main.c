@@ -10,8 +10,6 @@ char fileName[BUFFER];
 char tempFile[BUFFER];
 char prog[BUFFER];
 
-int isfileEmpty(FILE * fp);
-
 int main(int argc, char** argv)
 {
 	strcpy(prog,argv[0]);
@@ -59,7 +57,7 @@ int main(int argc, char** argv)
 	}
 
 	FILE *inputPtr = fopen(fileName, "r");
-	if(isfileEmpty(inputPtr) == 1)
+	if(isfileEmpty(inputPtr, prog) == 1)
 		return EXIT_FAILURE;	
 
 	struct node_t *root = buildTree(inputPtr); //Build the tree
@@ -78,31 +76,3 @@ int main(int argc, char** argv)
 
 
 }
-
-//Checking if the file is exist or empty
-int isfileEmpty(FILE * fp)
-{
-	if(fp != NULL)
-	{
-		fseek(fp, 0, SEEK_END);
-		int test = ftell(fp);
-
-		if(test == 0)
-		{
-			fprintf(stderr, "ERROR: %s: Input is empty\n", prog);
-			return 1;
-		}
-			 
-
-	}
-	else
-	{
-		fprintf(stderr, "ERROR: %s: Cannot open file\n", prog);
-		return 1;
-	}
-	
-	fseek(fp, 0, SEEK_SET);
-	
-	return 0;
-}
-

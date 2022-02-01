@@ -1,0 +1,46 @@
+## Project 0: Binary Traversal
+
+Name:		Duong Tuan Hoang
+Section: 	CMPSCI 4280 - Program Translation Project
+VCS:		git
+Date:		01/31/2022
+
+## Files
+	
+	main.c - the main program to process command and build a tree
+	node.h - define the tree node
+	tree.h, tree.c - the tree header file containing data and method of a tree
+	helper.h, helper.c - the header file containing helper method
+	P0_test* - test files
+	Makefile 
+
+## Run the program
+
+	> make
+	> To give the program keyboard input, run: ./P0 (remember to Enter and then Ctrl + D 
+	to finish the input)
+	> To direct the input from a file into program, run: ./P0 < filename
+	> To give program a file with extension ".sp2022", run: ./P0 filename (without extension)
+
+## Remove all executable and object files
+
+	> make clean
+
+## Description
+
+	> After supplying the input to program, program would check if the input is valid (if the
+	file exist, or if the input is empty or not). If it is not, the program would terminate 
+	and print the error message.
+	> If the input is valid, the pointer is passed to a separate function to starting building
+	a tree from the letters that come from the input. 
+	> The program will read the data left to right and put them into a tree. In particular, the
+ 	nodes for tree will have 3 children. The left child, right child and middle child. When 
+	storing new strings on the tree, the program will put them in the tree as in a normal 
+	binary search tree using left and right children. However, if there is an identical
+	match, the program will hang a new child off of the middle child.
+	> The binary search tree would be with repsect to the last letter of the string.
+	> The program will subsequently output 3 files corresponding to 3 traversals, named 
+	file.preorder, file.inorder and file.postorder. Note that "file" is the base name of the 
+	input file if given, and it is "output" if not given.
+	> When printing in traversal, the program would indent the node by 2 x depth of the node, 
+	then print the node's last letter, a ":", then the word in that node.

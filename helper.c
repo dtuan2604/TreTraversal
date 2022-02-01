@@ -6,6 +6,32 @@
 
 char* helpFile = "helper.h";
 
+int isfileEmpty(FILE * fp, char* caller)
+{
+	if(fp != NULL)
+	{
+		fseek(fp, 0, SEEK_END);
+		int test = ftell(fp);
+
+		if(test == 0)
+		{
+			fprintf(stderr, "ERROR: %s: Input is empty\n", caller);
+			return 1;
+		}
+			 
+
+	}
+	else
+	{
+		fprintf(stderr, "ERROR: %s: Cannot open file\n", caller);
+		return 1;
+	}
+	
+	fseek(fp, 0, SEEK_SET);
+	
+	return 0;
+}
+
 char* stringToData(char* str)
 {
 	int size = strlen(str) + 2;
